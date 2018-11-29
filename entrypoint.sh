@@ -33,14 +33,6 @@ for clients in 100; do
       echo "existing, SKIPPED"
       continue
     fi
-    '
-    if [[ ${clients} -le 64 ]]; then
-      count=5000
-    elif [[ ${clients} -le 256 ]]; then
-      count=2000
-    else
-      count=500
-    fi'
     count=1000
     mqtt-benchmark -broker tcp://$TARGETHOST:1883 -username "device-manager" -password "devmanager" -clients $clients -size $size -count ${count} -quiet -format json > /results/results-$clients-$size.json
     if [ $? -ne 0 ]; then
